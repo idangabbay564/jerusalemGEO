@@ -7,21 +7,117 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <title>jerusalemGEO</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
+
+*, *:before, *:after {
+	box-sizing:border-box;
+}
+
+body {
+	padding:$base-spacing-unit;
+	font-family:'Source Sans Pro', sans-serif;
+	margin:0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin:0;
+}
+
+.container {
+	max-width: 1000px;
+	margin-right:auto;
+	margin-left:auto;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.table {
+	width:100%;
+	border:1px solid $color-form-highlight;
+}
+
+.table-header {
+	display:flex;
+	width:100%;
+	background:#000;
+	padding:($half-spacing-unit * 1.5) 0;
+}
+
+.table-row {
+	display:flex;
+	width:100%;
+	padding:($half-spacing-unit * 1.5) 0;
+
+	&:nth-of-type(odd) {
+		background:$color-form-highlight;
+	}
+}
+
+.table-data, .header__item {
+	flex: 1 1 20%;
+	text-align:center;
+}
+
+.header__item {
+	text-transform:uppercase;
+}
+
+.filter__link {
+	color:white;
+	text-decoration: none;
+	position:relative;
+	display:inline-block;
+	padding-left:$base-spacing-unit;
+	padding-right:$base-spacing-unit;
+
+	&::after {
+		content:'';
+		position:absolute;
+		right:-($half-spacing-unit * 1.5);
+		color:white;
+		font-size:$half-spacing-unit;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&.desc::after {
+		content: '(desc)';
+	}
+
+	&.asc::after {
+		content: '(asc)';
+	}
+
+}
+  </style>
 </head>
 <body>
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
         <h1 class="text-center mb-3">ALL BUILDINGS</h1>
-        <form action="/users/login" method="POST">
+        <form action="/search" method="POST">
           <div class="form-group">
             <label for="email">Address</label>
             <input
-              type="email"
-              id="email"
-              name="email"
+              id="x"
+              name="x"
               class="form-control"
-              placeholder="Enter Address"
+              placeholder="Enter X"
+            />
+            <input
+              id="y"
+              name="y"
+              class="form-control"
+              placeholder="Enter Y"
             />
           </div>
           <div class="form-group">
@@ -34,11 +130,26 @@
               placeholder="Enter Distance"
             />
           </div>
-          <button type="submit" class="btn btn-primary btn-block">Login</button>
+          <button type="submit" class="btn btn-primary btn-block">Search</button>
         </form>
-        <p class="lead mt-4">
-          No Account? <a href="/users/register">Register</a>
-        </p>
+        <hr>
+        <div class="container">
+
+	<div class="table">
+		<div class="table-header">
+			<div class="header__item"><a id="name" class="filter__link" style="color: white">Building</a></div>
+			<div class="header__item"><a id="wins" class="filter__link filter__link--number" style="color:white">Location</a></div>
+		</div>
+		<div class="table-content">
+      <% for(var i = 0; i<posts.length; i++){ %>
+  			<div class="table-row">
+  				<div class="table-data"><%= posts[i].BuildingName %></div>
+  				<div class="table-data"><%= posts[i].X %>, <%= posts[i].Y %></div>
+  			</div>
+      <% } %>
+		</div>
+	</div>
+</div>
       </div>
     </div>
   </div>
