@@ -97,52 +97,63 @@ h1,h2,h3,h4,h5,h6 {
 	}
 
 }
+
+.slider {
+  width: 100%; /* Full-width */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
   </style>
 </head>
-<body>
+<body dir=rtl style="font-family: arial">
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
-        <h1 class="text-center mb-3">ALL BUILDINGS</h1>
+        <h1 class="text-center mb-3">חיפוס רדיוס</h1>
         <form action="/search" method="POST">
           <div class="form-group">
-            <label for="email">Address</label>
+            <p style="text-align: right">כתובת</p>
             <input
-              id="x"
-              name="x"
+              id="address"
+              name="address"
               class="form-control"
-              placeholder="Enter X"
-            />
-            <input
-              id="y"
-              name="y"
-              class="form-control"
-              placeholder="Enter Y"
+              placeholder="הזין כתובת"
             />
           </div>
           <div class="form-group">
-            <label for="password">Distance</label>
-            <input
-              id="distance"
-              name="distance"
-              class="form-control"
-              placeholder="Enter Distance"
-            />
+            <p style="text-align: right">מרחק החיפוס (ק"מ)</p>
+            <div style="width: 100%">
+              <input class="slider" name="distance" type="range" min="1" max="20" value="1" class="slider" id="myRange">
+              <p>ק"ם: <span id="demo"></span></p>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">Search</button>
+          <button type="submit" class="btn btn-primary btn-block">חיפוס</button>
         </form>
         <hr>
         <div class="container">
 
 	<div class="table">
 		<div class="table-header">
-			<div class="header__item"><a id="name" class="filter__link" style="color: white">Building</a></div>
-			<div class="header__item"><a id="wins" class="filter__link filter__link--number" style="color:white">Location</a></div>
+			<div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+      <div class="header__item"><a id="name" class="filter__link" style="color: white">סוג מבנה</a></div>
+      <div class="header__item"><a id="name" class="filter__link" style="color: white">כמות אנשים</a></div>
+      <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+      <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+			<div class="header__item"><a id="wins" class="filter__link filter__link--number" style="color:white">מיקום</a></div>
 		</div>
 		<div class="table-content">
       <% for(var i = 0; i<posts.length; i++){ %>
   			<div class="table-row">
-  				<div class="table-data"><%= posts[i].BuildingName %></div>
+  				<div class="table-data"><%= posts[i].FullAddress %></div>
+          <div class="table-data"><%= posts[i].Type %></div>
+          <div class="table-data"><%= posts[i].Residents %></div>
+          <div class="table-data"><%= posts[i].Floors %></div>
+          <div class="table-data"><%= posts[i].Entrances %></div>
   				<div class="table-data"><%= posts[i].X %>, <%= posts[i].Y %></div>
   			</div>
       <% } %>
@@ -156,5 +167,14 @@ h1,h2,h3,h4,h5,h6 {
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+  <script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+  </script>
 </body>
 </html>
