@@ -111,107 +111,121 @@ h1,h2,h3,h4,h5,h6 {
 
 .km {
    color: black;
-  font-size: 40px;
-  font-weight: bold
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0px !important
+}
+
+.subject {
+  font-weight:bold;
+}
+
+.logo {
+  font-size: 40px
 }
   </style>
 </head>
 <body dir=rtl style="font-family: arial">
-  <div class="row mt-5">
-    <div class="col-md-6 m-auto">
+  <div class="container">
+  <div class="row">
+    <div class="col-md-2 mt-5">
       <div class="card card-body">
-        <h1 class="text-center mb-3">חיפוש מבנים לפי רדיוס - ירושלים</h1>
         <form action="/search" method="POST">
           <div class="form-group">
-            <p style="text-align: right">כתובת</p>
             <input
               id="address"
               name="address"
               class="form-control"
-              placeholder="הזין כתובת"
+              placeholder="הזן כתובת"
               required
             />
           </div>
           <div class="form-group">
-            <p style="text-align: right">מרחק החיפוש (ק"מ)</p>
+            <p style="text-align: right">מרחק החיפוש</p>
             <div style="width: 100%">
-              <input class="slider" name="distance" type="range" min="0.5" max="20" value="0.5" step="0.5" class="slider" id="myRange">
-              <hr>
-              <p class="text-center km"><span id="demo2"></span></p>
-              <p class="text-center km">ק"ם: <span id="demo"></span></p>
-              <hr>
+              <input class="slider" name="distance" type="range" min="0.1" max="2" value="0.1" step="0.1" class="slider" id="myRange">
+              <p class="text-right km">ק"מ: <span id="demo"></span></p>
+              <p class="text-right km">כתובת: <span id="demo2"></span></p>
             </div>
           </div>
           <button type="submit" class="btn btn-primary btn-block">חיפוש</button>
         </form>
-        <hr>
-        <h1></h1>
-        <div class="container">
-          <div class="d-flex flex-wrap text-center justify-content-center">
-            <div class="m-5">
-              <i class="fa fa-clinic-medical" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black; border: 2px solid black">רפואה</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-home" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">דיור</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-university" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">ממשלה</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-school" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">חינוך</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-store" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">מסחר</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-vihara" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">תרבות</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-synagogue" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">דעת</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-baby" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">נוער</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %>)</h4>
-            </div>
-            <div class="m-5">
-              <i class="fa fa-question" style="font-size: 100px"></i>
-              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">אחר</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %>)</h4>
-            </div>
-          </div>
         </div>
-	<div class="table">
-		<div class="table-header">
-			<div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
-      <div class="header__item"><a id="name" class="filter__link" style="color: white">סוג מבנה</a></div>
-      <div class="header__item"><a id="name" class="filter__link" style="color: white">כמות אנשים</a></div>
-      <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
-      <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
-			<div class="header__item"><a id="wins" class="filter__link filter__link--number" style="color:white">מיקום</a></div>
-		</div>
-		<div class="table-content">
+      </div>
+
+
+    <div class="col-md-10 mt-5">
+      <div class="card card-body">
+        <% if(reqreq.distance != undefined){ %>
+    <h2 class="text-center">כתובת: <%= reqreq.address %><br><span style="border-top: 1px solid black">רדיוס: <%= reqreq.distance + ' ק"ם' %></span></h2>
+    <hr>
+    <% } %>
+    <div class="container">
+      <div class="d-flex flex-wrap text-center justify-content-center">
+        <div class="m-3">
+          <i class="fa fa-clinic-medical logo"></i>
+          <h4 class="mt-2 subject">רפואה</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-home logo"></i>
+          <h4 class="mt-2 subject">דיור</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-university logo"></i>
+          <h4 class="mt-2 subject">ממשלה</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-school logo"></i>
+          <h4 class="mt-2 subject">חינוך</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-store logo"></i>
+          <h4 class="mt-2 subject">מסחר</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-vihara logo"></i>
+          <h4 class="mt-2 subject">תרבות</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-synagogue logo"></i>
+          <h4 class="mt-2 subject">דעת</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-baby logo"></i>
+          <h4 class="mt-2 subject">נוער</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %></h4>
+        </div>
+        <div class="m-3">
+          <i class="fa fa-question logo"></i>
+          <h4 class="mt-2 subject">אחר</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %></h4>
+        </div>
+      </div>
+    </div>
+    <div class="table">
+      <div class="table-header">
+        <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+        <div class="header__item"><a id="name" class="filter__link" style="color: white">סוג מבנה</a></div>
+        <div class="header__item"><a id="name" class="filter__link" style="color: white">כמות אנשים</a></div>
+        <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+        <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+        <div class="header__item"><a id="wins" class="filter__link filter__link--number" style="color:white">מיקום</a></div>
+      </div>
+    <div class="table-content">
       <% for(var i = 0; i<posts.length; i++){ %>
-  			<div class="table-row" style="border-bottom: 1px solid black">
-  				<div class="table-data"><%= posts[i].FullAddress %></div>
+        <div class="table-row" style="border-bottom: 1px solid black">
+          <div class="table-data"><%= posts[i].FullAddress %></div>
           <div class="table-data"><%= posts[i].Type %></div>
           <div class="table-data"><%= posts[i].Residents %></div>
           <div class="table-data"><%= posts[i].Floors %></div>
           <div class="table-data"><%= posts[i].Entrances %></div>
-  				<div class="table-data" dir=ltr><%= posts[i].X %>, <%= posts[i].Y %></div>
-  			</div>
+          <div class="table-data" dir=ltr><%= posts[i].X %>, <%= posts[i].Y %></div>
+        </div>
       <% } %>
-		</div>
-	</div>
-</div>
       </div>
-    </div>
   </div>
+</div>
+</div>
+</div>
+</div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -231,7 +245,7 @@ h1,h2,h3,h4,h5,h6 {
     }
 
     valueaddress.oninput = function() {
-      output2.innerHTML = "כתובת: " + "<span style='text-decoration: underline'>" + this.value + "</span>" + ", ירושלים";
+      output2.innerHTML = "<span style='text-decoration: underline'>" + this.value + "</span>" + ", ירושלים";
     }
   </script>
 </body>

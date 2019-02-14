@@ -32,7 +32,8 @@ app.get('/', (req, res) => {
   rows.forEach((row) => {
     posts.push(row);
   });
-  res.render('index.ejs', {posts})
+  reqreq = []
+  res.render('index.ejs', {posts, reqreq})
   });
 });
 
@@ -59,7 +60,7 @@ app.post('/search', (req, ress) => {
 	  rows.forEach((row) => {
 	    posts.push(row);
 	  });
-	  ress.render('index.ejs', {posts})
+	  ress.render('index.ejs', {posts, reqreq})
 	});
 	});
 });
