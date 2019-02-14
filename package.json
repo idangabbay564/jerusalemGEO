@@ -17,6 +17,7 @@
     "node-geocoder": "^3.22.0",
     "node-open-geocoder": "^2.1.0",
     "nodemon": "^1.18.10",
+    "particles.js": "^2.0.0",
     "sqlite": "^3.0.1"
   }
 }
