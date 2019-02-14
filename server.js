@@ -23,7 +23,7 @@ app.listen(process.env.PORT || 3001, () => {
 let db = new sqlite3.Database('jerusalem.db');
 
 app.get('/', (req, res) => {
-  let sql = 'SELECT * FROM main';
+  let sql = 'SELECT * FROM jer';
   db.all(sql, [], (err, rows) => {
   if (err) {
     throw err;
@@ -32,7 +32,6 @@ app.get('/', (req, res) => {
   rows.forEach((row) => {
     posts.push(row);
   });
-  console.log(posts)
   res.render('index.ejs', {posts})
   });
 });
@@ -40,7 +39,7 @@ app.get('/', (req, res) => {
 app.post('/search', (req, ress) => {
   console.log(req.body)
   var reqreq = req.body
-	geocoder.geocode(reqreq.address, function(err, res) {
+	geocoder.geocode(reqreq.address + ", ירושלים", function(err, res) {
 	  console.log(res[0].latitude);
 		console.log(res[0].longitude);
 		reqreq.x = res[0].latitude;
@@ -50,7 +49,7 @@ app.post('/search', (req, ress) => {
 	  let loncalcup = parseFloat(reqreq.y) + (parseFloat(reqreq.distance) / 95)
 	  let loncalcdown = parseFloat(reqreq.y) - (parseFloat(reqreq.distance) / 95)
 	  let calculated = ' WHERE X < ' + latcalcup.toString() + ' AND X > ' + latcalcdown.toString() + ' AND Y < ' + loncalcup.toString() + ' AND Y > ' + loncalcdown.toString()
-	  let sql = 'SELECT * FROM main' + calculated;
+	  let sql = 'SELECT * FROM jer' + calculated;
 	  console.log(sql)
 	  db.all(sql, [], (err, rows) => {
 	  if (err) {
@@ -60,7 +59,6 @@ app.post('/search', (req, ress) => {
 	  rows.forEach((row) => {
 	    posts.push(row);
 	  });
-	  console.log(posts)
 	  ress.render('index.ejs', {posts})
 	});
 	});

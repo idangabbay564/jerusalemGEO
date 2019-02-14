@@ -108,13 +108,19 @@ h1,h2,h3,h4,h5,h6 {
 .slider:hover {
   opacity: 1; /* Fully shown on mouse-over */
 }
+
+.km {
+   color: black;
+  font-size: 40px;
+  font-weight: bold
+}
   </style>
 </head>
 <body dir=rtl style="font-family: arial">
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
-        <h1 class="text-center mb-3">חיפוס רדיוס</h1>
+        <h1 class="text-center mb-3">חיפוש מבנים לפי רדיוס - ירושלים</h1>
         <form action="/search" method="POST">
           <div class="form-group">
             <p style="text-align: right">כתובת</p>
@@ -123,20 +129,63 @@ h1,h2,h3,h4,h5,h6 {
               name="address"
               class="form-control"
               placeholder="הזין כתובת"
+              required
             />
           </div>
           <div class="form-group">
-            <p style="text-align: right">מרחק החיפוס (ק"מ)</p>
+            <p style="text-align: right">מרחק החיפוש (ק"מ)</p>
             <div style="width: 100%">
-              <input class="slider" name="distance" type="range" min="1" max="20" value="1" class="slider" id="myRange">
-              <p>ק"ם: <span id="demo"></span></p>
+              <input class="slider" name="distance" type="range" min="0.5" max="20" value="0.5" step="0.5" class="slider" id="myRange">
+              <hr>
+              <p class="text-center km"><span id="demo2"></span></p>
+              <p class="text-center km">ק"ם: <span id="demo"></span></p>
+              <hr>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">חיפוס</button>
+          <button type="submit" class="btn btn-primary btn-block">חיפוש</button>
         </form>
         <hr>
+        <h1></h1>
         <div class="container">
-
+          <div class="d-flex flex-wrap text-center justify-content-center">
+            <div class="m-5">
+              <i class="fa fa-clinic-medical" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black; border: 2px solid black">רפואה</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-home" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">דיור</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-university" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">ממשלה</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-school" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">חינוך</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-store" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">מסחר</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-vihara" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">תרבות</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-synagogue" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">דעת</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-baby" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">נוער</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %>)</h4>
+            </div>
+            <div class="m-5">
+              <i class="fa fa-question" style="font-size: 100px"></i>
+              <h4 class="mt-2" style="font-weight:bold; border: 2px solid black">אחר</h4><h4 class="pt-2">(<% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %>)</h4>
+            </div>
+          </div>
+        </div>
 	<div class="table">
 		<div class="table-header">
 			<div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
@@ -148,13 +197,13 @@ h1,h2,h3,h4,h5,h6 {
 		</div>
 		<div class="table-content">
       <% for(var i = 0; i<posts.length; i++){ %>
-  			<div class="table-row">
+  			<div class="table-row" style="border-bottom: 1px solid black">
   				<div class="table-data"><%= posts[i].FullAddress %></div>
           <div class="table-data"><%= posts[i].Type %></div>
           <div class="table-data"><%= posts[i].Residents %></div>
           <div class="table-data"><%= posts[i].Floors %></div>
           <div class="table-data"><%= posts[i].Entrances %></div>
-  				<div class="table-data"><%= posts[i].X %>, <%= posts[i].Y %></div>
+  				<div class="table-data" dir=ltr><%= posts[i].X %>, <%= posts[i].Y %></div>
   			</div>
       <% } %>
 		</div>
@@ -169,11 +218,20 @@ h1,h2,h3,h4,h5,h6 {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
   <script>
     var slider = document.getElementById("myRange");
+    var valueaddress = document.getElementById("address");
+
+    var output2 = document.getElementById("demo2");
     var output = document.getElementById("demo");
+
     output.innerHTML = slider.value;
+    output2.innerHTML = valueaddress.value;
 
     slider.oninput = function() {
       output.innerHTML = this.value;
+    }
+
+    valueaddress.oninput = function() {
+      output2.innerHTML = "כתובת: " + "<span style='text-decoration: underline'>" + this.value + "</span>" + ", ירושלים";
     }
   </script>
 </body>
