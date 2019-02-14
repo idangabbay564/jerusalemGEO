@@ -24,6 +24,7 @@ html, body {
 	font-family:'Source Sans Pro', sans-serif;
 	margin:0;
   padding: 0;
+  background-color: red
 }
 
 .background {
@@ -31,7 +32,8 @@ html, body {
   display: block;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 1;
+  background-color: red
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -45,6 +47,7 @@ h1,h2,h3,h4,h5,h6 {
 	display:flex;
 	justify-content:center;
 	align-items:center;
+  z-index: 3
 }
 
 .table {
@@ -129,15 +132,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .logo {
-  font-size: 40px
+  font-size: 30px;
 }
   </style>
 </head>
 <body dir=rtl style="font-family: arial">
-  <div class="container">
-  <div class="row">
+  <div class="container" style="z-index: 2">
+  <div class="row" style="z-index: 2">
     <div class="col-md-2 mt-5">
-      <div class="card card-body">
+      <div class="card card-body shadow-lg">
         <form action="/search" method="POST">
           <div class="form-group">
             <input
@@ -156,92 +159,98 @@ h1,h2,h3,h4,h5,h6 {
               <p class="text-right km">כתובת: <span id="demo2"></span></p>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">חיפוש</button>
+          <button type="submit" class="btn btn-primary btn-block" style="background-color: red; border: none">חיפוש</button>
         </form>
         </div>
       </div>
 
 
-    <div class="col-md-10 mt-5">
-      <div class="card card-body">
+    <div class="col-md-10 mt-5 mb-5">
+      <div class="card card-body shadow-lg">
         <% if(reqreq.distance != undefined){ %>
-    <h2 class="text-center">כתובת: <%= reqreq.address %><br><span style="border-top: 1px solid black">רדיוס: <%= reqreq.distance + ' ק"ם' %></span></h2>
+    <h3 class="text-center">כתובת: <%= reqreq.address %><br><span style="border-top: 1px solid black">רדיוס: <%= reqreq.distance + ' ק"ם' %></span></h3>
     <hr>
     <% } %>
     <div class="container">
-      <div class="d-flex flex-wrap text-center justify-content-center">
-        <div class="m-3 outer">
-          <i class="fa fa-clinic-medical logo"></i>
-          <h4 class="mt-2 subject">רפואה</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-home logo"></i>
-          <h4 class="mt-2 subject">דיור</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-university logo"></i>
-          <h4 class="mt-2 subject">ממשלה</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-school logo"></i>
-          <h4 class="mt-2 subject">חינוך</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-store logo"></i>
-          <h4 class="mt-2 subject">מסחר</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-vihara logo"></i>
-          <h4 class="mt-2 subject">תרבות</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-synagogue logo"></i>
-          <h4 class="mt-2 subject">דעת</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-baby logo"></i>
-          <h4 class="mt-2 subject">נוער</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %></h4>
-        </div>
-        <div class="m-3 outer">
-          <i class="fa fa-question logo"></i>
-          <h4 class="mt-2 subject">אחר</h4><h4 class="pt-2"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %></h4>
+      <div class="col-md-5">
+        <div class="d-flex flex-wrap text-center justify-content-center">
+          <div class="m-3 outer">
+            <i class="fa fa-clinic-medical logo"></i>
+            <h5 class="mt-1 subject">רפואה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-home logo"></i>
+            <h5 class="mt-1 subject">דיור</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-university logo"></i>
+            <h5 class="mt-1 subject">ממשלה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-school logo"></i>
+            <h5 class="mt-1 subject">חינוך</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-store logo"></i>
+            <h5 class="mt-1 subject">מסחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-vihara logo"></i>
+            <h5 class="mt-1 subject">תרבות</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-synagogue logo"></i>
+            <h5 class="mt-1 subject">דעת</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-baby logo"></i>
+            <h5 class="mt-1 subject">נוער</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %></h5>
+          </div>
+          <div class="m-3 outer">
+            <i class="fa fa-question logo"></i>
+            <h5 class="mt-1 subject">אחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %></h5>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="table">
-      <div class="table-header">
-        <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
-        <div class="header__item"><a id="name" class="filter__link" style="color: white">סוג מבנה</a></div>
-        <div class="header__item"><a id="name" class="filter__link" style="color: white">כמות אנשים</a></div>
-        <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
-        <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
-        <div class="header__item"><a id="wins" class="filter__link filter__link--number" style="color:white">מיקום</a></div>
-      </div>
-    <div class="table-content">
-      <% for(var i = 0; i<posts.length; i++){ %>
-        <div class="table-row" style="border-bottom: 1px solid black">
-          <div class="table-data"><%= posts[i].FullAddress %></div>
-          <div class="table-data"><%= posts[i].Type %></div>
-          <div class="table-data"><%= posts[i].Residents %></div>
-          <div class="table-data"><%= posts[i].Floors %></div>
-          <div class="table-data"><%= posts[i].Entrances %></div>
-          <div class="table-data" dir=ltr><%= posts[i].X %>, <%= posts[i].Y %></div>
+      <% if(reqreq.distance != undefined){ %>
+        <div class="col-md-5">
+        <div class="table">
+          <div class="table-header">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כמות אנשים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ %>
+            <div class="table-row" style="border-bottom: 1px solid black">
+              <div class="table-data"><%= posts[i].FullAddress %></div>
+              <div class="table-data"><%= posts[i].Type %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].X %>, <%= posts[i].Y %></div>
+            </div>
+          <% } %>
+          </div>
         </div>
+      </div>
       <% } %>
-      </div>
-  </div>
+    </div>
+
 </div>
 </div>
 </div>
 </div>
-<canvas class="background"></canvas>
+<!--<canvas class="background"></canvas>-->
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
   <script>
-    window.onload = function() {
+    /*window.onload = function() {
       Particles.init({
         selector: '.background',
         speed: 0.1,
@@ -251,7 +260,7 @@ h1,h2,h3,h4,h5,h6 {
         sizeVariations: 3,
         color: '#D3D3D3'
       });
-    };
+    };*/
 
     var slider = document.getElementById("myRange");
     var valueaddress = document.getElementById("address");
