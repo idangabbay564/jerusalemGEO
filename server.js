@@ -7,7 +7,8 @@ var NodeGeocoder = require('node-geocoder');
 
 var options = {
   provider: 'google',
-	apiKey: "AIzaSyDXY_aO0xDGZX4BSOkw8w88wLpp0Q7HTIQ"
+	apiKey: "AIzaSyDXY_aO0xDGZX4BSOkw8w88wLpp0Q7HTIQ",
+  language: "HE"
 };
 
 var geocoder = NodeGeocoder(options);
@@ -43,8 +44,10 @@ app.post('/search', (req, ress) => {
 	geocoder.geocode(reqreq.address + ", ירושלים", function(err, res) {
 	  console.log(res[0].latitude);
 		console.log(res[0].longitude);
+    console.log(res)
 		reqreq.x = res[0].latitude;
 		reqreq.y = res[0].longitude;
+    reqreq.address2 = res[0].formattedAddress;
 		let latcalcup = parseFloat(reqreq.x) + (parseFloat(reqreq.distance) / 111)
 	  let latcalcdown = parseFloat(reqreq.x) - (parseFloat(reqreq.distance) / 111)
 	  let loncalcup = parseFloat(reqreq.y) + (parseFloat(reqreq.distance) / 95)

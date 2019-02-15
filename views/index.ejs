@@ -134,6 +134,37 @@ h1,h2,h3,h4,h5,h6 {
 .logo {
   font-size: 30px;
 }
+
+.outer{
+  color: black;
+  text-decoration: none; /* no underline */
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.outer:hover{
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.hmm {
+  transition: transform 2s ease;
+}
+
+.hmmm {
+  transition: transform 2s ease;
+  display:none;
+}
+
   </style>
 </head>
 <body dir=rtl style="font-family: arial">
@@ -168,17 +199,18 @@ h1,h2,h3,h4,h5,h6 {
     <div class="col-md-10 mt-5 mb-5">
       <div class="card card-body shadow-lg">
         <% if(reqreq.distance != undefined){ %>
-    <h3 class="text-center">כתובת: <%= reqreq.address %><br><span style="border-top: 1px solid black">רדיוס: <%= reqreq.distance + ' ק"ם' %></span></h3>
+    <h4 class="text-center font-weight-bold"><span class="pb-1" style="border-bottom: 1px solid black;"><%= reqreq.address2 %></span></h4>
+    <h4 class="text-center font-weight-bold mt-2"><i class="far fa-dot-circle" style="font-size: 20px"></i> <%= reqreq.distance + ' ק"ם' %></h4>
     <hr>
     <% } %>
     <div class="container">
       <div class="col-md-5">
         <div class="d-flex flex-wrap text-center justify-content-center">
           <div class="m-3 outer">
-            <i class="fa fa-clinic-medical logo"></i>
+            <i class="fa fa-clinic-medical logo hmm"></i>
             <h5 class="mt-1 subject">רפואה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h5>
           </div>
-          <div class="m-3 outer">
+          <div class="m-3 outer housingb">
             <i class="fa fa-home logo"></i>
             <h5 class="mt-1 subject">דיור</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h5>
           </div>
@@ -213,7 +245,7 @@ h1,h2,h3,h4,h5,h6 {
         </div>
       </div>
       <% if(reqreq.distance != undefined){ %>
-        <div class="col-md-5">
+        <div class="col-md-10 hmmm">
         <div class="table">
           <div class="table-header">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -225,12 +257,11 @@ h1,h2,h3,h4,h5,h6 {
         <div class="table-content">
           <% for(var i = 0; i<posts.length; i++){ %>
             <div class="table-row" style="border-bottom: 1px solid black">
-              <div class="table-data"><%= posts[i].FullAddress %></div>
-              <div class="table-data"><%= posts[i].Type %></div>
+              <div class="table-data"><%= posts[i].SubType %></div>
               <div class="table-data"><%= posts[i].Residents %></div>
               <div class="table-data"><%= posts[i].Floors %></div>
               <div class="table-data"><%= posts[i].Entrances %></div>
-              <div class="table-data" dir=ltr><%= posts[i].X %>, <%= posts[i].Y %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
             </div>
           <% } %>
           </div>
@@ -249,6 +280,10 @@ h1,h2,h3,h4,h5,h6 {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
   <script>
     /*window.onload = function() {
       Particles.init({
@@ -261,6 +296,12 @@ h1,h2,h3,h4,h5,h6 {
         color: '#D3D3D3'
       });
     };*/
+
+    $(document).ready(function(){
+      $('.hmm').click(function(){
+        $('.hmm').hide();
+      });
+    });
 
     var slider = document.getElementById("myRange");
     var valueaddress = document.getElementById("address");
