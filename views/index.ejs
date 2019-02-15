@@ -58,7 +58,7 @@ h1,h2,h3,h4,h5,h6 {
 .table-header {
 	display:flex;
 	width:100%;
-	background:#000;
+	background:red;
 	padding:($half-spacing-unit * 1.5) 0;
 }
 
@@ -165,6 +165,24 @@ h1,h2,h3,h4,h5,h6 {
   display:none;
 }
 
+.nav-item, .nav-link {
+  padding: 0px
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: red !important;
+  border-color: transparent
+}
+
+.nav-tabs:hover .nav-item.show:hover .nav-link:hover, .nav-tabs:hover .nav-link.active:hover {
+  border-color: transparent
+}
+
+.nav-tabs:hover .nav-item.show:hover .nav-link:hover, .nav-tabs:hover .nav-link:hover {
+  border-color: transparent
+}
+
+
   </style>
 </head>
 <body dir=rtl style="font-family: arial">
@@ -205,15 +223,17 @@ h1,h2,h3,h4,h5,h6 {
     <% } %>
     <div class="container">
       <div class="col-md-5">
-        <div class="d-flex flex-wrap text-center justify-content-center">
-          <div class="m-3 outer">
+      <nav>
+        <div class="nav nav-tabs justify-content-center d-flex flex-wrap text-center" id="nav-tab" role="tablist">
+        <!--<div class="d-flex flex-wrap text-center justify-content-center">-->
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><div class="m-3 outer">
             <i class="fa fa-clinic-medical logo hmm"></i>
             <h5 class="mt-1 subject">רפואה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer housingb">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><div class="m-3 outer housingb">
             <i class="fa fa-home logo"></i>
             <h5 class="mt-1 subject">דיור</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h5>
-          </div>
+          </div></a>
           <div class="m-3 outer">
             <i class="fa fa-university logo"></i>
             <h5 class="mt-1 subject">ממשלה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %></h5>
@@ -243,34 +263,52 @@ h1,h2,h3,h4,h5,h6 {
             <h5 class="mt-1 subject">אחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %></h5>
           </div>
         </div>
+        </div>
+      </nav>
+      <!--</div>-->
+
+
+    <!--<nav>
+      <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">רפואה</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">דיור</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">ממשלה</a>
       </div>
+    </nav>-->
+
+  </div>
+
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
       <% if(reqreq.distance != undefined){ %>
-        <div class="col-md-10 hmmm">
-        <div class="table">
-          <div class="table-header">
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
-            <div class="header__item"><a id="name" class="filter__link" style="color: white">כמות אנשים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
             <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
             <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
             <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
           </div>
         <div class="table-content">
-          <% for(var i = 0; i<posts.length; i++){ %>
-            <div class="table-row" style="border-bottom: 1px solid black">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ %>
+            <div class="table-row">
               <div class="table-data"><%= posts[i].SubType %></div>
               <div class="table-data"><%= posts[i].Residents %></div>
               <div class="table-data"><%= posts[i].Floors %></div>
               <div class="table-data"><%= posts[i].Entrances %></div>
               <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
             </div>
-          <% } %>
+            <hr>
+          <% }} %>
           </div>
         </div>
-      </div>
       <% } %>
     </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">1234</div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+  </div>
 
-</div>
 </div>
 </div>
 </div>
@@ -299,7 +337,7 @@ h1,h2,h3,h4,h5,h6 {
 
     $(document).ready(function(){
       $('.hmm').click(function(){
-        $('.hmm').hide();
+
       });
     });
 
