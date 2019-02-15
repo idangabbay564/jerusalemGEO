@@ -45,9 +45,11 @@ app.post('/search', (req, ress) => {
 	  console.log(res[0].latitude);
 		console.log(res[0].longitude);
     console.log(res)
+
 		reqreq.x = res[0].latitude;
 		reqreq.y = res[0].longitude;
     reqreq.address2 = res[0].formattedAddress;
+
 		let latcalcup = parseFloat(reqreq.x) + (parseFloat(reqreq.distance) / 111)
 	  let latcalcdown = parseFloat(reqreq.x) - (parseFloat(reqreq.distance) / 111)
 	  let loncalcup = parseFloat(reqreq.y) + (parseFloat(reqreq.distance) / 95)

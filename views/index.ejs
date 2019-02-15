@@ -122,17 +122,18 @@ h1,h2,h3,h4,h5,h6 {
 
 .km {
    color: black;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin: 0px !important
 }
 
 .subject {
   font-weight:bold;
+  font-size: 14px
 }
 
 .logo {
-  font-size: 30px;
+  font-size: 22.5px;
 }
 
 .outer{
@@ -182,13 +183,42 @@ h1,h2,h3,h4,h5,h6 {
   border-color: transparent
 }
 
+@media only screen and (min-width: 765px) {
+  #tables {
+    margin-top: 80px !important;
+  }
+  #searches{
+    margin-top: 67px !important
+  }
+}
+
+.mydiv {
+    background: red;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    -webkit-box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index:9;
+}
+
+.counted{
+  font-size: 14px
+}
+
 
   </style>
 </head>
+<div class="mydiv"></div>
+<img src="idk.svg" style="position: absolute; top: 10px; left: 10px; height: 50px; z-index: 10;">
 <body dir=rtl style="font-family: arial">
   <div class="container" style="z-index: 2">
   <div class="row" style="z-index: 2">
-    <div class="col-md-2 mt-5">
+    <div class="col-md-2" style="margin-top: 80px">
       <div class="card card-body shadow-lg">
         <form action="/search" method="POST">
           <div class="form-group">
@@ -201,7 +231,7 @@ h1,h2,h3,h4,h5,h6 {
             />
           </div>
           <div class="form-group">
-            <p style="text-align: right">מרחק החיפוש</p>
+            <p style="text-align: right; font-weight: bold; font-size: 16px">מרחק החיפוש</p>
             <div style="width: 100%">
               <input class="slider" name="distance" type="range" min="0.1" max="2" value="0.1" step="0.1" class="slider" id="myRange">
               <p class="text-right km">ק"מ: <span id="demo"></span></p>
@@ -214,53 +244,57 @@ h1,h2,h3,h4,h5,h6 {
       </div>
 
 
-    <div class="col-md-10 mt-5 mb-5">
+    <div id="tables" class="col-md-8 mb-3" style="margin-top: 30px">
       <div class="card card-body shadow-lg">
         <% if(reqreq.distance != undefined){ %>
     <h4 class="text-center font-weight-bold"><span class="pb-1" style="border-bottom: 1px solid black;"><%= reqreq.address2 %></span></h4>
     <h4 class="text-center font-weight-bold mt-2"><i class="far fa-dot-circle" style="font-size: 20px"></i> <%= reqreq.distance + ' ק"ם' %></h4>
+    <h6 class="text-center font-weight bold" style="margin-top: 10px"><%= reqreq.x + ", " + reqreq.y %></h6>
     <hr>
     <% } %>
     <div class="container">
-      <div class="col-md-5">
+      <div class="col-md-12">
+        <% if(reqreq.distance == undefined){ %>
+          <h1 class="text-center font-weight-bolder" style="padding: 40px; padding-bottom: 56px">חיפוש מבנים - ירושלים</h1>
+        <% } %>
       <nav>
         <div class="nav nav-tabs justify-content-center d-flex flex-wrap text-center" id="nav-tab" role="tablist">
         <!--<div class="d-flex flex-wrap text-center justify-content-center">-->
-          <a class="nav-item nav-link" id="nav-health-tab" data-toggle="tab" href="#nav-health" role="tab" aria-controls="nav-health" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-health-tab" data-toggle="tab" href="#nav-health" role="tab" aria-controls="nav-health" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-clinic-medical logo hmm"></i>
-            <h5 class="mt-1 subject">רפואה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">רפואה</h5><h5 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-housing-tab" data-toggle="tab" href="#nav-housing" role="tab" aria-controls="nav-housing" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-housing-tab" data-toggle="tab" href="#nav-housing" role="tab" aria-controls="nav-housing" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-home logo"></i>
-            <h5 class="mt-1 subject">דיור</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">דיור</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-government-tab" data-toggle="tab" href="#nav-government" role="tab" aria-controls="nav-government" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-government-tab" data-toggle="tab" href="#nav-government" role="tab" aria-controls="nav-government" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-university logo"></i>
-            <h5 class="mt-1 subject">ממשלה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">ממשלה</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-school logo"></i>
-            <h5 class="mt-1 subject">חינוך</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">חינוך</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-shopping-tab" data-toggle="tab" href="#nav-shopping" role="tab" aria-controls="nav-shopping" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-shopping-tab" data-toggle="tab" href="#nav-shopping" role="tab" aria-controls="nav-shopping" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-store logo"></i>
-            <h5 class="mt-1 subject">מסחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">מסחר</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-culture-tab" data-toggle="tab" href="#nav-culture" role="tab" aria-controls="nav-culture" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-culture-tab" data-toggle="tab" href="#nav-culture" role="tab" aria-controls="nav-culture" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-vihara logo"></i>
-            <h5 class="mt-1 subject">תרבות</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">תרבות</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-religion-tab" data-toggle="tab" href="#nav-religion" role="tab" aria-controls="nav-religion" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-religion-tab" data-toggle="tab" href="#nav-religion" role="tab" aria-controls="nav-religion" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-synagogue logo"></i>
-            <h5 class="mt-1 subject">דעת</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">דעת</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-youth-tab" data-toggle="tab" href="#nav-youth" role="tab" aria-controls="nav-youth" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-youth-tab" data-toggle="tab" href="#nav-youth" role="tab" aria-controls="nav-youth" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-baby logo"></i>
-            <h5 class="mt-1 subject">נוער</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">נוער</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
-          <a class="nav-item nav-link" id="nav-other-tab" data-toggle="tab" href="#nav-other" role="tab" aria-controls="nav-other" aria-selected="false"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-other-tab" data-toggle="tab" href="#nav-other" role="tab" aria-controls="nav-other" aria-selected="false"><div class="m-2 outer">
             <i class="fa fa-question logo"></i>
-            <h5 class="mt-1 subject">אחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %></h5>
+            <h5 class="mt-1 subject">אחר</h5><h6 class="pt-1 counted"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %><% } %></h6>
           </div></a>
         </div>
         </div>
@@ -282,6 +316,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-health" role="tabpanel" aria-labelledby="nav-health-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">רפואה</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -309,6 +344,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-housing" role="tabpanel" aria-labelledby="nav-housing-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">דיור</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -336,6 +372,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-government" role="tabpanel" aria-labelledby="nav-government-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">ממשלה</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -363,6 +400,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">חינוך</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -390,6 +428,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-shopping" role="tabpanel" aria-labelledby="nav-shopping-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">מסחר</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -417,6 +456,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-culture" role="tabpanel" aria-labelledby="nav-culture-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">תרבות</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -444,6 +484,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-religion" role="tabpanel" aria-labelledby="nav-religion-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">דעת</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -471,6 +512,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-youth" role="tabpanel" aria-labelledby="nav-youth-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">נוער</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -498,6 +540,7 @@ h1,h2,h3,h4,h5,h6 {
     <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab">
 
       <% if(reqreq.distance != undefined){ %>
+        <h5 style="font-weight: bolder; text-align: center; padding-top: 10px">אחר</h5>
         <div class="table mt-4">
           <div class="table-header mb-3 p-2">
             <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
@@ -526,8 +569,34 @@ h1,h2,h3,h4,h5,h6 {
 
 </div>
 </div>
+
+<div id="searches" class="col-md-2">
+  <div class="card card-body shadow-lg" style="margin-top: 14px">
+    <form action="/search" method="POST">
+      <div class="form-group">
+        <input
+          id="address"
+          name="address"
+          class="form-control"
+          placeholder="הזן כתובת"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <p style="text-align: right">מרחק החיפוש</p>
+        <div style="width: 100%">
+          <input class="slider" name="distance" type="range" min="0.1" max="2" value="0.1" step="0.1" class="slider" id="myRange">
+          <p class="text-right km">ק"מ: <span id="demo"></span></p>
+          <p class="text-right km">כתובת: <span id="demo2"></span></p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" style="background-color: red; border: none">חיפוש</button>
+    </form>
+  </div>
 </div>
-<!--<canvas class="background"></canvas>-->
+
+</div>
+<canvas class="background"></canvas>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
