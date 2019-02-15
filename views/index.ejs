@@ -226,42 +226,42 @@ h1,h2,h3,h4,h5,h6 {
       <nav>
         <div class="nav nav-tabs justify-content-center d-flex flex-wrap text-center" id="nav-tab" role="tablist">
         <!--<div class="d-flex flex-wrap text-center justify-content-center">-->
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-health-tab" data-toggle="tab" href="#nav-health" role="tab" aria-controls="nav-health" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-clinic-medical logo hmm"></i>
             <h5 class="mt-1 subject">רפואה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "רפואה"){ counter++}}%><%= counter %></h5>
           </div></a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><div class="m-3 outer housingb">
+          <a class="nav-item nav-link" id="nav-housing-tab" data-toggle="tab" href="#nav-housing" role="tab" aria-controls="nav-housing" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-home logo"></i>
             <h5 class="mt-1 subject">דיור</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ counter++}}%><%= counter %></h5>
           </div></a>
-          <div class="m-3 outer">
+          <a class="nav-item nav-link" id="nav-government-tab" data-toggle="tab" href="#nav-government" role="tab" aria-controls="nav-government" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-university logo"></i>
             <h5 class="mt-1 subject">ממשלה</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-school logo"></i>
             <h5 class="mt-1 subject">חינוך</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-shopping-tab" data-toggle="tab" href="#nav-shopping" role="tab" aria-controls="nav-shopping" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-store logo"></i>
             <h5 class="mt-1 subject">מסחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-culture-tab" data-toggle="tab" href="#nav-culture" role="tab" aria-controls="nav-culture" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-vihara logo"></i>
             <h5 class="mt-1 subject">תרבות</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-religion-tab" data-toggle="tab" href="#nav-religion" role="tab" aria-controls="nav-religion" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-synagogue logo"></i>
             <h5 class="mt-1 subject">דעת</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-youth-tab" data-toggle="tab" href="#nav-youth" role="tab" aria-controls="nav-youth" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-baby logo"></i>
             <h5 class="mt-1 subject">נוער</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ counter++}}%><%= counter %></h5>
-          </div>
-          <div class="m-3 outer">
+          </div></a>
+          <a class="nav-item nav-link" id="nav-other-tab" data-toggle="tab" href="#nav-other" role="tab" aria-controls="nav-other" aria-selected="false"><div class="m-3 outer">
             <i class="fa fa-question logo"></i>
             <h5 class="mt-1 subject">אחר</h5><h5 class="pt-1"><% counter = 0; for(var i =0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ counter++}}%><%= counter %></h5>
-          </div>
+          </div></a>
         </div>
         </div>
       </nav>
@@ -279,7 +279,7 @@ h1,h2,h3,h4,h5,h6 {
   </div>
 
   <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane fade" id="nav-health" role="tabpanel" aria-labelledby="nav-health-tab">
 
       <% if(reqreq.distance != undefined){ %>
         <div class="table mt-4">
@@ -304,9 +304,224 @@ h1,h2,h3,h4,h5,h6 {
           </div>
         </div>
       <% } %>
+
     </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">1234</div>
-    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+    <div class="tab-pane fade" id="nav-housing" role="tabpanel" aria-labelledby="nav-housing-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "דיור"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-government" role="tabpanel" aria-labelledby="nav-government-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "ממשלה"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "חינוך"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-shopping" role="tabpanel" aria-labelledby="nav-shopping-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "מסחר"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-culture" role="tabpanel" aria-labelledby="nav-culture-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "תרבות"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-religion" role="tabpanel" aria-labelledby="nav-religion-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "דעת"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-youth" role="tabpanel" aria-labelledby="nav-youth-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "נוער"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+    <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab">
+
+      <% if(reqreq.distance != undefined){ %>
+        <div class="table mt-4">
+          <div class="table-header mb-3 p-2">
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">מבנה</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">תושבים</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">קומות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כניסות</a></div>
+            <div class="header__item"><a id="name" class="filter__link" style="color: white">כתובת</a></div>
+          </div>
+        <div class="table-content">
+          <% for(var i = 0; i<posts.length; i++){ if(posts[i].Type == "אחר"){ %>
+            <div class="table-row">
+              <div class="table-data"><%= posts[i].SubType %></div>
+              <div class="table-data"><%= posts[i].Residents %></div>
+              <div class="table-data"><%= posts[i].Floors %></div>
+              <div class="table-data"><%= posts[i].Entrances %></div>
+              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+            </div>
+            <hr>
+          <% }} %>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
   </div>
 
 </div>
