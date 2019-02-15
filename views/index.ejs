@@ -26,14 +26,14 @@ $color-form-highlight: #EEEEEE;
 
 html, body {
 	font-family:'Source Sans Pro', sans-serif;
-	margin:0;
+	margin:;
   padding: 0;
   background-color: red
 }
 
 .background {
   position: absolute;
-  display: block;
+  display: none;
   top: 0;
   left: 0;
   z-index: 1;
@@ -194,6 +194,14 @@ h1,h2,h3,h4,h5,h6 {
   #searches{
     margin-top: 67px !important
   }
+  .background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: red
+  }
 }
 
 .mydiv {
@@ -252,7 +260,7 @@ h1,h2,h3,h4,h5,h6 {
       <div class="card card-body shadow-lg">
         <% if(reqreq.distance != undefined){ %>
     <h4 class="text-center font-weight-bold"><span class="pb-1" style="border-bottom: 1px solid black;"><%= reqreq.address2 %></span></h4>
-    <a target="_blank" href="http://www.google.com/maps/place/<%= reqreq.x + ', ' + reqreq.y %>"><h6 class="text-center font-weight bold" dir=ltr style="margin-top: 10px"><%= reqreq.x + ", " + reqreq.y %> <i class="fa fa-map-pin"></i></h6></a>
+    <h6 class="text-center font-weight bold" dir=ltr style="margin-top: 10px"><a target="_blank" href="http://www.google.com/maps/place/<%= reqreq.x + ', ' + reqreq.y %>"><%= reqreq.x + ", " + reqreq.y %> <i class="fa fa-map-pin"></a></i></h6>
     <h4 class="text-center font-weight-bold mt-2"><i class="far fa-dot-circle" style="font-size: 20px"></i> <%= reqreq.distance + ' ק"ם' %></h4>
     <hr>
     <% } %>
@@ -610,7 +618,9 @@ h1,h2,h3,h4,h5,h6 {
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
   <script>
+
     window.onload = function() {
       Particles.init({
         selector: '.background',
