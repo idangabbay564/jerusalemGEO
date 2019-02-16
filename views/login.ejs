@@ -1,0 +1,36 @@
+<div class="mydiv"></div>
+<img src="../idk.svg" style="position: absolute; top: 10px; left: 10px; height: 50px; z-index: 10;">
+<div class="container" style="z-index: 5">
+  <div class="row text-right" style="margin-top: 70px" dir=rtl>
+    <div class="col-md-6 m-auto">
+      <div class="card card-body shadow-lg">
+        <% include ./partials/messages %>
+        <form action="/users/login" method="POST">
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="הזן אימייל"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="הזן סיסמה"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" style="background-color: red; border: none">כניסה</button>
+        </form>
+        <hr>
+        <p class="lead mt-2 font-weight-bolder">
+          אין לך חשבון? <a href="/users/register">הרשמה</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

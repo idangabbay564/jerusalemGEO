@@ -1,5 +1,7 @@
 const express = require('express');
-const app = express();
+const router = express.Router();
+const { ensureAuthenticated } = require('../config/auth');
+
 var fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 var bodyParser = require('body-parser');
@@ -11,12 +13,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
-require('./config/passport')(passport);
-const db = require('./config/keys').MongoURI;
-
-mongoose.connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB Connected!'))
-  .catch(err => console.log(err));
+let dbsqlite = new sqlite3.Database('jerusalem.db');
 
 var options = {
   provider: 'google',
@@ -26,39 +23,10 @@ var options = {
 
 var geocoder = NodeGeocoder(options);
 
-app.set('view engine', 'ejs')
-app.use(expressLayouts);
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(flash());
-
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  next();
-});
-
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
-
-app.listen(process.env.PORT || 3001, () => {
-	console.log('listening on 3001')
-});
-
-let dbsqlite = new sqlite3.Database('jerusalem.db');
-
-app.get('/', (req, res) => {
+// WELCOME PAGE
+router.get('/', (req, res) => res.render('welcome'));
+// DASHBOARD
+router.get('/dashboard', ensureAuthenticated, (reqqq, res) =>{
   let sql = 'SELECT * FROM jer';
   dbsqlite.all(sql, [], (err, rows) => {
   if (err) {
@@ -69,11 +37,11 @@ app.get('/', (req, res) => {
     posts.push(row);
   });
   reqreq = []
-  res.render('index.ejs', {posts, reqreq})
+  res.render('dashboard', {posts, reqreq, reqqq})
   });
 });
 
-app.post('/search', (req, ress) => {
+router.post('/search', ensureAuthenticated, (req, ress) => {
   console.log(req.body)
   var reqreq = req.body
 	geocoder.geocode(reqreq.address + ", ירושלים", function(err, res) {
@@ -100,7 +68,10 @@ app.post('/search', (req, ress) => {
 	  rows.forEach((row) => {
 	    posts.push(row);
 	  });
-	  ress.render('index.ejs', {posts, reqreq})
+    var reqqq = req
+	  ress.render('dashboard', {posts, reqreq, reqqq})
 	});
 	});
 });
+
+module.exports = router;
