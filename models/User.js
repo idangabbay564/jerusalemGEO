@@ -16,7 +16,11 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  mysearches: [{
+  mysearch: String,
+  mydistance: String
+}]
 });
 
 const User = mongoose.model('User', UserSchema);

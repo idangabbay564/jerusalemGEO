@@ -58,7 +58,7 @@ app.listen(process.env.PORT || 3001, () => {
 
 let dbsqlite = new sqlite3.Database('jerusalem.db');
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
   let sql = 'SELECT * FROM jer';
   dbsqlite.all(sql, [], (err, rows) => {
   if (err) {
@@ -71,9 +71,9 @@ app.get('/', (req, res) => {
   reqreq = []
   res.render('index.ejs', {posts, reqreq})
   });
-});
+});*/
 
-app.post('/search', (req, ress) => {
+/*app.post('/search', (req, ress) => {
   console.log(req.body)
   var reqreq = req.body
 	geocoder.geocode(reqreq.address + ", ירושלים", function(err, res) {
@@ -103,4 +103,4 @@ app.post('/search', (req, ress) => {
 	  ress.render('index.ejs', {posts, reqreq})
 	});
 	});
-});
+});*/

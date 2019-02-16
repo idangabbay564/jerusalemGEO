@@ -20,7 +20,7 @@
               name="username"
               class="form-control"
               type="hidden"
-              value="<%= reqqq.user.name %>"
+              value="<%= reqqq.user.email %>"
             />
           </div>
           <div class="form-group">
@@ -125,7 +125,7 @@
               <div class="table-data"><%= posts[i].Residents %></div>
               <div class="table-data"><%= posts[i].Floors %></div>
               <div class="table-data"><%= posts[i].Entrances %></div>
-              <div class="table-data" dir=ltr><%= posts[i].FullAddress %></div>
+              <div class="table-data" dir=ltr><a target="_blank" href="http://www.google.com/search?q=<%= posts[i].FullAddress %>"><%= posts[i].FullAddress %></a></div>
             </div>
             <hr>
           <% }} %>
@@ -364,27 +364,34 @@
 </div>
 
 <div id="searches" class="col-md-2">
-  <div class="card card-body shadow-lg" style="margin-top: 14px">
-    <form action="/search" method="POST">
-      <div class="form-group">
-        <input
-          id="address"
-          name="address"
-          class="form-control"
-          placeholder="הזן כתובת"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <p style="text-align: right">מרחק החיפוש</p>
+  <div class="card card-body shadow-lg" style="margin-top: 13px; text-align: center">
+        <p style="text-align: center; font-weight: bold; text-decoration: underline">חיפושים שלי</p>
         <div style="width: 100%">
-          <input class="slider" name="distance" type="range" min="0.1" max="2" value="0.1" step="0.1" class="slider" id="myRange">
-          <p class="text-right km">ק"מ: <span id="demo"></span></p>
-          <p class="text-right km">כתובת: <span id="demo2"></span></p>
+          <% historyaddress.reverse(); historydistance.reverse(); for(var i = 0; i<historyaddress.length; i++){%>
+            <form action="/search2" method="POST">
+              <div class="form-group">
+                <input
+                  id="address"
+                  name="address"
+                  class="form-control"
+                  type="hidden"
+                  value="<%= historyaddress[i] %>"
+                />
+                <input
+                  id="distance"
+                  name="distance"
+                  class="form-control"
+                  type="hidden"
+                  value="<%= historydistance[i] %>"
+                />
+                <button type="submit">
+                  <p style="font-size: 11px; text-align: right; color:red; font-weight:bold; margin-bottom: 0px"><%= historyaddress[i] %><br><%= historydistance[i] %> ק"מ</p>
+                </button>
+                <hr>
+              </div>
+            </form>
+          <% } %>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block" style="background-color: red; border: none">חיפוש</button>
-    </form>
   </div>
 </div>
 
