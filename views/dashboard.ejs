@@ -45,7 +45,25 @@
     <h4 class="text-center font-weight-bold"><span class="pb-1" style="border-bottom: 1px solid black;"><%= reqreq.address2 %></span></h4>
     <h6 class="text-center font-weight bold" dir=ltr style="margin-top: 10px"><a target="_blank" href="http://www.google.com/maps/place/<%= reqreq.x + ', ' + reqreq.y %>"><%= reqreq.x + ", " + reqreq.y %> <i class="fa fa-map-pin"></a></i></h6>
     <h4 class="text-center font-weight-bold mt-2"><i class="far fa-dot-circle" style="font-size: 20px"></i> <%= reqreq.distance + ' ק"ם' %></h4>
-    <h6 class="text-center font-weight bold mt-2"><i class="fa fa-home" style="font-size: 15px"></i><span class="mr-1 ml-2" style="font-size: 13px"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){  counter++ }%><%= counter %><% } %></span><i class="fa fa-male" style="font-size: 15px"></i><span class="mr-1" style="font-size: 13px"><% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){if(posts[i].Residents != "Unknown"){ counter += posts[i].Residents }}%><%= counter %><% } %></span></h6>
+
+    <h6 class="text-center font-weight bold mt-2">
+
+      <!-- TOTAL BUILDINGS -->
+      <i class="fa fa-home" style="font-size: 15px"></i>
+
+      <span class="mr-1 ml-2" style="font-size: 13px">
+        <% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){  counter++ }%><%= counter %><% } %>
+      </span>
+
+      <!-- TOTAL RESIDENTS -->
+      <i class="fa fa-male" style="font-size: 15px"></i>
+
+      <span class="mr-1" style="font-size: 13px">
+        <% if(reqreq.distance != undefined){ counter = 0; for(var i =0; i<posts.length; i++){ counter += posts[i].Residents }%><%= counter %><% } %>
+      </span>
+    </h6>
+
+
     <hr>
     <% } %>
     <div class="container">
