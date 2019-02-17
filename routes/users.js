@@ -20,17 +20,17 @@ router.post('/register', (req, res) => {
 
   // CHECK REQUIRED FIELDS
   if(!name || !email || !password || !password2){
-    errors.push({ msg: 'Please fill in all fields' });
+    errors.push({ msg: 'פיספסת שדה' });
   }
 
   // CHECK PASSWORDS MATCH
   if(password !== password2){
-    errors.push({ msg: 'Passwords do not match' });
+    errors.push({ msg: 'סיסמאות לא תואמות' });
   }
 
   // CHECK PASS LENGTH
   if(password.length < 6){
-    errors.push({ msg: 'Password should be at least 6 characters' });
+    errors.push({ msg: 'הסיסמה חייבת להיות לפחות 6 אותיות' });
   }
 
   if(errors.length > 0){
@@ -47,7 +47,7 @@ router.post('/register', (req, res) => {
       .then(user => {
         if(user){
           // USER EXISTS
-          errors.push({ msg: 'Email is already registered' });
+          errors.push({ msg: 'אימייל כבר רשומה' });
           res.render('register', {
             errors,
             name,
@@ -71,7 +71,7 @@ router.post('/register', (req, res) => {
             // SAVE USER
             newUser.save()
               .then(user => {
-                req.flash('success_msg', 'You are now registered and can log in');
+                req.flash('success_msg', 'אתה רשום ויכול להתחבר');
                 res.redirect('/users/login');
               })
               .catch(err => console.log(err));
@@ -93,7 +93,7 @@ router.post('/login', (req, res, next) => {
 // LOGOUT HANDLE
 router.get('/logout', (req, res) => {
   req.logout();
-  req.flash('success_msg', 'You are logged out');
+  req.flash('success_msg', 'יצאת בהצלחה');
   res.redirect('/users/login');
 });
 
