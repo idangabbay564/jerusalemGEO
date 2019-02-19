@@ -5,3 +5,6 @@
 5 מרכז
 6 דרום
 7 מזרח
+
+VIEWS/DASHBOARD.EJS = HTML
+ROUTES/INDEX.JS = LOGIC

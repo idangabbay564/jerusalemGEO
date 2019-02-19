@@ -7,6 +7,7 @@ var fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 var bodyParser = require('body-parser');
 var NodeGeocoder = require('node-geocoder');
+var math = require('mathjs');
 
 const expressLayouts = require('express-ejs-layouts')
 const mongoose = require('mongoose');
@@ -107,13 +108,26 @@ router.post('/search', ensureAuthenticated, (req, ress) => {
 	  if (err) {
 	    throw err;
 	  }
-	  posts = []
+	  postsbefore = []
+    posts = []
 	  rows.forEach((row) => {
-	    posts.push(row);
+	    postsbefore.push(row);
 	  });
     /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
+
+    for(var i = 0; i<postsbefore.length; i++){
+      var x = postsbefore[i].X;
+      var y = postsbefore[i].Y;
+      var x1 = parseFloat(reqreq.x);
+      var y1 = parseFloat(reqreq.y);
+      var d = parseFloat(reqreq.distance);
+
+      if(math.sqrt([111*(x - x1)]**2 + [95*(y - y1)]**2) <= d) {
+        posts.push(postsbefore[i]);
+      }
+    }
+
     var reqqq = req
-    console.log(posts)
 
 	  ress.render('dashboard', {posts, reqreq, reqqq, historyaddress, historydistance})
 	});
