@@ -18,6 +18,7 @@
     "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.15.6",
+    "mathjs": "^5.4.2",
     "mongoose": "^5.4.13",
     "node-geocoder": "^3.22.0",
     "node-open-geocoder": "^2.1.0",
