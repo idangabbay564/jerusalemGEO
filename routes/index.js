@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
+const inside = require('point-in-geopolygon')
 
 var fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
@@ -20,6 +21,36 @@ var options = {
 	apiKey: "AIzaSyDXY_aO0xDGZX4BSOkw8w88wLpp0Q7HTIQ",
   language: "HE"
 };
+
+var obj = JSON.parse(fs.readFileSync('rova.geojson', 'utf8'))
+
+var myobj1 = obj.features[0].geometry.coordinates
+var myobj2 = obj.features[1].geometry.coordinates
+var myobj3 = obj.features[2].geometry.coordinates
+var myobj4 = obj.features[3].geometry.coordinates
+var myobj5 = obj.features[4].geometry.coordinates
+var myobj6 = obj.features[5].geometry.coordinates
+var myobj7 = obj.features[6].geometry.coordinates
+
+var checkrova = function(point) {
+  if(inside.polygon(myobj1,(point))){
+  console.log("צפון")
+} else if(inside.polygon(myobj2,(point))){
+  console.log("אלונים")
+} else if(inside.polygon(myobj3,(point))){
+  console.log("מערב")
+} else if(inside.polygon(myobj4,(point))){
+  console.log("אורנים")
+} else if(inside.polygon(myobj5,(point))){
+  console.log("מרכז")
+} else if(inside.polygon(myobj6,(point))){
+  console.log("דרום")
+} else if(inside.polygon(myobj7,(point))){
+  console.log("מזרח")
+}
+}
+
+checkrova([31.829611, 35.233159])
 
 const User = require('../models/User');
 const db = require('../config/keys').MongoURI;
@@ -82,6 +113,7 @@ router.post('/search', ensureAuthenticated, (req, ress) => {
 	  });
     /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
     var reqqq = req
+    console.log(posts)
 
 	  ress.render('dashboard', {posts, reqreq, reqqq, historyaddress, historydistance})
 	});

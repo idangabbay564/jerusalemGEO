@@ -25,6 +25,7 @@
     "particles.js": "^2.0.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "point-in-geopolygon": "^1.0.1",
     "sqlite": "^3.0.1"
   }
 }
