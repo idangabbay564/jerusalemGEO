@@ -5,3 +5,5 @@
 5 מרכז
 6 דרום
 7 מזרח
+
+EXAMPLE PULL REQUEST
