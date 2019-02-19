@@ -112,6 +112,20 @@ router.post('/search', ensureAuthenticated, (req, ress) => {
 	    posts.push(row);
 	  });
     /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
+
+    for(i=0; i<posts.length; i++){
+      var x = posts[i].X;
+      var y = posts[i].X;
+      var x1 = parseFloat(reqreq.x);
+      var y1 = parseFloat(reqreq.y);
+      var d = parseFloat(reqreq.distance);
+
+      if Math.sqrt([111*(x - x1)]**2 + [95*(y - y1)]**2) > d {
+        delete posts[i];
+      }
+    }
+
+
     var reqqq = req
     console.log(posts)
 
