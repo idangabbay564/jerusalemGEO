@@ -26,6 +26,8 @@ var options = {
 
 var obj = JSON.parse(fs.readFileSync('rova.geojson', 'utf8'))
 
+var obj2 = JSON.parse(fs.readFileSync('schunot.geojson', 'utf8'))
+
 var myobj1 = obj.features[0].geometry.coordinates
 var myobj2 = obj.features[1].geometry.coordinates
 var myobj3 = obj.features[2].geometry.coordinates
