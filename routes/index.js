@@ -33,25 +33,6 @@ var myobj5 = obj.features[4].geometry.coordinates
 var myobj6 = obj.features[5].geometry.coordinates
 var myobj7 = obj.features[6].geometry.coordinates
 
-var checkrova = function(point) {
-  if(inside.polygon(myobj1,(point))){
-  console.log("צפון")
-} else if(inside.polygon(myobj2,(point))){
-  console.log("אלונים")
-} else if(inside.polygon(myobj3,(point))){
-  console.log("מערב")
-} else if(inside.polygon(myobj4,(point))){
-  console.log("אורנים")
-} else if(inside.polygon(myobj5,(point))){
-  console.log("מרכז")
-} else if(inside.polygon(myobj6,(point))){
-  console.log("דרום")
-} else if(inside.polygon(myobj7,(point))){
-  console.log("מזרח")
-}
-}
-
-checkrova([31.829611, 35.233159])
 
 const User = require('../models/User');
 const db = require('../config/keys').MongoURI;
@@ -86,6 +67,7 @@ router.get('/dashboard', ensureAuthenticated, (reqqq, res) =>{
 router.post('/search', ensureAuthenticated, (req, ress) => {
   var reqreq = req.body
 	geocoder.geocode(reqreq.address + ", ירושלים", function(err, res) {
+
 	  console.log(res[0].latitude);
 		console.log(res[0].longitude);
 
@@ -162,10 +144,24 @@ router.post('/search2', ensureAuthenticated, (req, ress) => {
 	  if (err) {
 	    throw err;
 	  }
-	  posts = []
+    postsbefore = []
+    posts = []
 	  rows.forEach((row) => {
-	    posts.push(row);
+	    postsbefore.push(row);
 	  });
+    /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
+
+    for(var i = 0; i<postsbefore.length; i++){
+      var x = postsbefore[i].X;
+      var y = postsbefore[i].Y;
+      var x1 = parseFloat(reqreq.x);
+      var y1 = parseFloat(reqreq.y);
+      var d = parseFloat(reqreq.distance);
+
+      if(math.sqrt([111*(x - x1)]**2 + [95*(y - y1)]**2) <= d) {
+        posts.push(postsbefore[i]);
+      }
+    }
     /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
     var reqqq = req
 
