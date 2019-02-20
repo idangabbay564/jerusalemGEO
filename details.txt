@@ -8,3 +8,13 @@
 
 VIEWS/DASHBOARD.EJS = HTML
 ROUTES/INDEX.JS = LOGIC
+
+myobj1 1
+myobj2 2
+myobj3 3
+myobj4 3a
+myobj5 4
+myobj6 5
+myobj7 6
+myobj8 6a
+myobj9 7

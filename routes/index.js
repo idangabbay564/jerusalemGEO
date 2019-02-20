@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
 const inside = require('point-in-geopolygon')
+const turf = require('@turf/boolean-point-in-polygon')
 
 var fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
@@ -32,7 +33,38 @@ var myobj4 = obj.features[3].geometry.coordinates
 var myobj5 = obj.features[4].geometry.coordinates
 var myobj6 = obj.features[5].geometry.coordinates
 var myobj7 = obj.features[6].geometry.coordinates
+var myobj8 = obj.features[7].geometry.coordinates
+var myobj9 = obj.features[8].geometry.coordinates
 
+var checkrova = function(point) {
+  if(inside.polygon(myobj1,point)){
+  console.log("צפון")
+} else if(inside.polygon(myobj2, point)){
+  console.log("אלונים")
+} else if(inside.polygon(myobj3, point)){
+  console.log("מערב")
+} else if(inside.polygon(myobj4, point)){
+  console.log("מערב")
+} else if(inside.polygon(myobj5, point)){
+  console.log("אורנים")
+} else if(inside.polygon(myobj6, point)){
+  console.log("מרכז")
+} else if(inside.polygon(myobj7, point)){
+  console.log("דרום")
+} else if(inside.polygon(myobj8, point)){
+  console.log("דרום")
+} else if(inside.polygon(myobj9, point)){
+  console.log("מזרח")
+} else {
+  console.log("לא בירושלים")
+}
+}
+
+var point1 = 31.829611
+var point2 = 35.233159
+
+var point = [point1, point2]
+checkrova(point)
 
 const User = require('../models/User');
 const db = require('../config/keys').MongoURI;
@@ -67,13 +99,37 @@ router.get('/dashboard', ensureAuthenticated, (reqqq, res) =>{
 router.post('/search', ensureAuthenticated, (req, ress) => {
   var reqreq = req.body
 	geocoder.geocode(reqreq.address + ", ירושלים", function(err, res) {
-
 	  console.log(res[0].latitude);
 		console.log(res[0].longitude);
 
 		reqreq.x = res[0].latitude;
 		reqreq.y = res[0].longitude;
     reqreq.address2 = res[0].formattedAddress;
+
+    var point1 = reqreq.x
+    var point2 = reqreq.y
+    var point = [point1, point2]
+
+    checkrova(point)
+
+    if(inside.polygon(myobj1, point) == true){
+      console.log("צפון")
+    } /*else if(inside.polygon(myobj2, point) == true){
+      console.log("אלונים")
+    } else if(inside.polygon(myobj3, point) == true){
+      console.log("מערב")
+    } else if(inside.polygon(myobj4, point) == true){
+      console.log("אורנים")
+    } else if(inside.polygon(myobj5, point) == true){
+      console.log("מרכז")
+    } else if(inside.polygon(myobj6, point) == true){
+      console.log("דרום")
+    } else if(inside.polygon(myobj7, point) == true){
+      console.log("מזרח")
+    } else {
+      console.log("לא בירושלים")
+    }*/
+
     historyaddress = []
     historydistance = []
     User.findOneAndUpdate({ email: req.user.email }, { $push:{mysearches: {mysearch: reqreq.address2, mydistance: req.body.distance}} }, { upsert: true, new: true }, function (err, yoyo) {console.log("Inserted search");
@@ -144,24 +200,10 @@ router.post('/search2', ensureAuthenticated, (req, ress) => {
 	  if (err) {
 	    throw err;
 	  }
-    postsbefore = []
-    posts = []
+	  posts = []
 	  rows.forEach((row) => {
-	    postsbefore.push(row);
+	    posts.push(row);
 	  });
-    /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
-
-    for(var i = 0; i<postsbefore.length; i++){
-      var x = postsbefore[i].X;
-      var y = postsbefore[i].Y;
-      var x1 = parseFloat(reqreq.x);
-      var y1 = parseFloat(reqreq.y);
-      var d = parseFloat(reqreq.distance);
-
-      if(math.sqrt([111*(x - x1)]**2 + [95*(y - y1)]**2) <= d) {
-        posts.push(postsbefore[i]);
-      }
-    }
     /*User.findOne({ email: req.user.email }, function (err, yo) {console.log(yo)})*/
     var reqqq = req
 
