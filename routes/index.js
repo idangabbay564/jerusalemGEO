@@ -24,9 +24,28 @@ var options = {
   language: "HE"
 };
 
-var obj = JSON.parse(fs.readFileSync('rova.geojson', 'utf8'))
+// SCHUNOT
+var idan = JSON.parse(fs.readFileSync('schunot.geojson', 'utf8'))
 
-var obj2 = JSON.parse(fs.readFileSync('schunot.geojson', 'utf8'))
+var allschunot = [];
+
+for(var x = 0; x < idan.features.length; x++){
+  allschunot.push({"Schuna": idan.features[x].properties.SCHN_NAME, "Polygon": idan.features[x].geometry.coordinates})
+}
+
+var checkschunot = function(mypoint){
+  for(var y = 0; y < idan.features.length; y++){
+    var myname = allschunot[y].Schuna
+    var mypolygon = allschunot[y].Polygon
+    if(inside.polygon(mypolygon,mypoint)){
+      console.log(myname)
+    }
+  }
+}
+
+
+// ROVAIM
+var obj = JSON.parse(fs.readFileSync('rova.geojson', 'utf8'))
 
 var myobj1 = obj.features[0].geometry.coordinates
 var myobj2 = obj.features[1].geometry.coordinates
@@ -66,7 +85,9 @@ var point1 = 31.829611
 var point2 = 35.233159
 
 var point = [point1, point2]
-checkrova(point)
+//checkrova(point)
+
+//console.log(inside.polygon(myobj1, point))
 
 const User = require('../models/User');
 const db = require('../config/keys').MongoURI;
@@ -112,25 +133,8 @@ router.post('/search', ensureAuthenticated, (req, ress) => {
     var point2 = reqreq.y
     var point = [point1, point2]
 
+    checkschunot(point)
     checkrova(point)
-
-    if(inside.polygon(myobj1, point) == true){
-      console.log("צפון")
-    } /*else if(inside.polygon(myobj2, point) == true){
-      console.log("אלונים")
-    } else if(inside.polygon(myobj3, point) == true){
-      console.log("מערב")
-    } else if(inside.polygon(myobj4, point) == true){
-      console.log("אורנים")
-    } else if(inside.polygon(myobj5, point) == true){
-      console.log("מרכז")
-    } else if(inside.polygon(myobj6, point) == true){
-      console.log("דרום")
-    } else if(inside.polygon(myobj7, point) == true){
-      console.log("מזרח")
-    } else {
-      console.log("לא בירושלים")
-    }*/
 
     historyaddress = []
     historydistance = []
@@ -217,12 +221,18 @@ router.post('/search2', ensureAuthenticated, (req, ress) => {
 
 });
 
-/*router.post('/delete', ensureAuthenticated, (req, ress) => {
-  var reqreq = req.body
-    User.findOneAndUpdate({ email: req.user.email }, { $push:{mysearches: {mysearch: reqreq.address2, mydistance: req.body.distance}} }, { upsert: true, new: true }, function (err, yoyo) {console.log("Inserted search");
-	  ress.redirect('dashboard')
-	});
-});*/
 
 
+
+
+
+
+
+
+
+
+
+
+
+//#################################################################
 module.exports = router;
